@@ -4,34 +4,22 @@ var button;
 var button2;
 var button3;
 var textField;
-var socket = io.connect('http://localhost:8080', { 'forceNew': true });
-
-//escuchar evento messages
-socket.on('messages', function(data) {
-  console.log(data);
-  render(data);
-})
 
 
-//recibir mensajes
-function render (data) {
-  var html = data.map(function(elem, index) {
-    return(`<div>
-              <strong>${elem.author}</strong>:
-              <em>${elem.text}</em>
-            </div>`);
-  }).join(" ");
+ws = new WebSocket('ws://mango.iwallinshop.com:8080');
 
-  document.getElementById('messages').innerHTML = html;
-}
+ws.onerror = () => showMessage('WebSocket error');
+ws.onopen = () => showMessage('WebSocket connection established');
+ws.onclose = () => showMessage('WebSocket connection closed');
 
 //emitir mensajes
 function addMessage1(e) {
 
-
 	message = document.getElementById("message");
 	message.value = "1";
-	socket.emit('new-message', message.value);
+
+//	socket.emit('new-message', message.value);
+  ws.send("1");
   return false;
 }
 
@@ -41,7 +29,10 @@ function addMessage3(e) {
 
 	message = document.getElementById("message");
 	message.value = "2";
-	socket.emit('new-message', message.value);
+  ws.send("2");
+
+
+//socket.emit('new-message', message.value);
   return false;
 }
 

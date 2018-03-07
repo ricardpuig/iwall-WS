@@ -1,5 +1,5 @@
 {
-  "name": "iwall_ws",
+  "name": "websockets-test",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,8 @@
   "dependencies": {
     "express": "^4.16.2",
     "osc": "^2.2.0",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "websocket": "^1.0.25",
+    "ws": "^5.0.0"
   }
 }
